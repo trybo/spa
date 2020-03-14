@@ -3,11 +3,44 @@
 	<head>
 		<title>Create DOM elements</title>
 		<meta charset="UTF-8">
+		<style>
+		table, td {
+			border: 1px solid black;
+			border-collapse: collapse;
+			width: 250px;
+			height: 25px;
+			text-align: center;
+			font-size: 15px;
+		}
+	</style>
 	</head>
 	<body>
+
 		<script>
 			// a JavaScript code here ...
+			var table = document.createElement('table');
+			let num = 1;
+
+			for (var i=1; i<=2; i++) {
+				var tr = document.createElement('tr');
+
+				var td1 = document.createElement('td');
+				var td2 = document.createElement('td');
+
+				var text1 = document.createTextNode(num);
+				var text2 = document.createTextNode(num + 1);
+
+				td1.appendChild(text1);
+				td2.appendChild(text2);
+				tr.appendChild(td1);
+				tr.appendChild(td2);
+
+				table.appendChild(tr);
+				num += 2;
+			}
 			
+			document.body.appendChild(table);
+
 		</script>
 	</body>
 </html>

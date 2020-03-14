@@ -13,6 +13,18 @@
     <script>
         // a JavaScript code here ...
 
+        // h1 element
+        console.log(document.getElementsByTagName('h1')["0"].textContent)
+        // Element with id=„someText”
+        console.log(document.getElementById('someTest').textContent)
+        // Element with class=„important”
+        console.log(document.getElementsByClassName('important')["0"].textContent)
+        // All paragraph elements
+        var p = document.getElementsByTagName("p");
+        var i;
+        for (i = 0; i < p.length; i++){
+          console.log(p[i].textContent)
+        }
     </script>
 </body>
 
