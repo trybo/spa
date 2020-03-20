@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Chart of the last 10 gold price quotations</title>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+</head>
+
+<body>
+  <canvas id="myChart" width="400" height="400"></canvas>
+  <script>
+    var date = [];
+    var prices = [];
+    
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        for (let i = 0; i < data.length; i++) {
+          prices.push(data[i].cena.toString());
+          date.push(data[i].data.toString());
+        }
+      }
+    };
+    request.open('GET', 'http://api.nbp.pl/api/cenyzlota/last/10/?format=json', false);
+    request.send();
+
+    // Check arrays with date and prices
+    //console.log(prices);
+    //console.log(date);
+
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var chart = new Chart(ctx, {
+      type: "line",
+      data: {
+        labels: date,
+        datasets: [{
+          label: "Last 10 gold price quotations",
+          borderColor: "rgb(242, 203, 0)",
+          data: prices
+        }]
+      },
+
+      options: {
+        title: {
+          display: true,
+          text: 'Chart of the last 10 gold price quotations',
+          fontSize: 24
+        }
+      }
+    });
+  </script>
+</body>
+
+</html>
