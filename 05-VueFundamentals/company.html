@@ -1,9 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
+  <div id="app" style="width: fit-content; border: 1px black solid; text-align: center; padding: 10px;">
+    <p>
+      <b>
+        {{ companyBigName() }}
+      </b>
+      <br>
+      {{ address }}
+      <br>
+      {{ postcode }} {{ city }}
+      <br>
+      tel. {{ landline }}, {{ mobile }}
+      <br>
+      <a :href="web">{{ web }}</a>
+    </p>
+  </div>
+
   <script>
     var app = new Vue({
       el: '#app',
@@ -15,9 +33,15 @@
         landline: '22 345 90 21',
         mobile: '888 213 992',
         web: 'http://www.unikpol.pl'
+      },
+      methods: {
+        companyBigName: function() {
+          return this.company.toUpperCase();
+        }
       }
     });
   </script>
 
 </body>
+
 </html>

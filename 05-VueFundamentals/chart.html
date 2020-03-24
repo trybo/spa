@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 </head>
+
 <body>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <div id="app">
+    <canvas id="myChart" width="400" height="400"></canvas>
+  </div>
   <script>
     var app = new Vue({
       el: '#app',
@@ -29,9 +37,39 @@
             language: 'Php',
             popularity: 7.37
           }
-        ] 
+        ]
+      },
+      computed: {
+        languagesToChart: function () {
+          return this.films.map(film => film.language);
+        },
+        popularityToChart: function () {
+          return this.films.map(film => film.popularity);
+        }
+      }
+    });
+
+    var ctx = document.getElementById("myChart").getContext("2d");
+    var chart = new Chart(ctx, {
+      type: "bar",
+      data: {
+        labels: app.languagesToChart,
+        datasets: [{
+          label: "Percentage popularity of programming languages",
+          backgroundColor: "rgb(47, 0, 235)",
+          data: app.popularityToChart
+        }]
+      },
+
+      options: {
+        title: {
+          display: true,
+          text: 'The popularity of programming languages',
+          fontSize: 24
+        }
       }
     });
   </script>
 </body>
+
 </html>
