@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>Elective Courses</h1>
+        <input type="checkbox" id="cours1" value="cours1" v-model="courses">
+        <label for="cours1">Programowanie aplikacji
+            webowych SPA</label>
+        <br>
+        <input type="checkbox" id="cours2" value="cours2" v-model="courses"> 
+        <label for="cours2">System informacji
+            marketingowej w przedsiębiorstwie</label>
+        <br>
+        <input type="checkbox" id="cours3" value="cours3" v-model="courses"> 
+        <label for="cours3">Programowanie sztucznej
+            inteligencji</label>
+        <br>
+        <input type="checkbox" id="cours4" value="cours4" v-model="courses"> 
+        <label for="cours4">Comarch Business
+            Intelligence w praktyce zarządzania</label>
+        <br>
+        <input type="checkbox" id="cours5" value="cours5" v-model="courses"> 
+        <label for="cours5">Design Thinking -
+            twórcze myślenie projektowe</label>
+        <p>Number of selected courses: <b>{{ courses.length }}</b></p>
+    </div>
+    <script>
+        var app = new Vue({
+            el: '#app',
+            data: {
+                courses: []
+            }
+        });
+    </script>
+
+</body>
+
+</html>
