@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Decimal to binary converter</h1>
+        <converter-dec-to-bin :decimal=8></converter-dec-to-bin>
+        <converter-dec-to-bin :decimal=170></converter-dec-to-bin>
+        <converter-dec-to-bin :decimal=204></converter-dec-to-bin>
+        <converter-dec-to-bin :decimal=3855></converter-dec-to-bin>
+    </div>
+
+    <script type="text/x-template" id="converter-template">
+        <p>{{ decimal }}(10) = {{ convert }}(2)</p>
+    </script>
+
+    <script>
+        Vue.component('converter-dec-to-bin', {
+            template: '#converter-template',
+            props: {
+                decimal: Number
+            },
+            computed: {
+                convert() {
+                    return Number(this.decimal).toString(2)
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app',
+        })
+    </script>
+
+</body>
+
+</html>

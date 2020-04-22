@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <h1>Films</h1>
+        <film-info title="Wyspa tajemnic" director="Martin Scorsese" year="2010"></film-info>
+        <film-info title="Iluzja" director="Louis Leterrier" year="2013"></film-info>
+        <film-info title="Forrest Gump" director="Robert Zemeckis" year="1994"></film-info>
+    </div>
+
+    <script type="text/x-template" id="film-info-template">
+        <div>
+            <b>Title:</b> {{ title }}
+            <br>
+            <b>Director:</b> {{ director }}
+            <br>
+            <b>Year:</b> {{ year }}
+            <br><br>
+        </div>
+    </script>
+    <script>
+        Vue.component('film-info', {
+            template: '#film-info-template',
+            props: ['title', 'director', 'year']
+        })
+
+        new Vue({
+            el: '#app'
+        })
+    </script>
+
+
+</body>
+
+</html>

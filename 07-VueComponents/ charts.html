@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.min.js"></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <chart></chart>
+    </div>
+
+    <script>
+        Vue.component('chart', {
+            template: '<canvas id="myChart"></canvas>',
+            data() {
+                return {
+                    labels: ['Java', 'JavaScript', 'Python'],
+                    chartData: [21.42, 8.26, 25.95],
+                }
+            }, 
+            mounted() {
+                this.initializeChart
+            },
+            computed: {
+                initializeChart: function () {
+                    const ctx = document.getElementById("myChart");
+                    const myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: this.labels,
+                            datasets: [{
+                                label: "Percentage popularity of programming languages",
+                                backgroundColor: "rgb(47, 0, 235)",
+                                data: this.chartData,
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: true,
+                                text: 'The popularity of programming languages',
+                                fontSize: 24
+                            }
+                        }
+                    });
+                }
+            }
+        })
+
+        const app = new Vue({
+            el: '#app',
+            data: {
+
+            },
+        });
+
+    </script>
+
+</body>
+
+</html>

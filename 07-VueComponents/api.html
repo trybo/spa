@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <style>
+        table {
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            border: 1px solid black;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <currency></currency>
+    </div>
+
+    <script type="text/x-template" id="currency-template">
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Currency</th>
+                        <th>Code</th>
+                        <th>Mid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr v-for="currency in getCurrencies">
+                        <td>{{ currency.currency }}</td>
+                        <td>{{ currency.code }}</td>
+                        <td>{{ currency.mid }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </script>
+
+    <script>
+        Vue.component('currency', {
+            template: '#currency-template',
+            data: function() {
+                return {
+                    currencies: []
+                }
+            },
+            computed: {
+                getCurrencies: () => {
+                    var request = new XMLHttpRequest();
+                    request.open('GET', 'http://api.nbp.pl/api/exchangerates/tables/a/?format=json', false);
+                    request.onreadystatechange = () => {
+                        if (request.readyState == 4 && request.status == 200) {
+                            this.currencies = JSON.parse(request.responseText)[0].rates;
+                        };
+                    }
+                    request.send();
+                    return this.currencies;
+                }
+            }
+        });
+
+        new Vue({
+            el: '#app',
+        });
+    </script>
+
+</body>
+
+</html>
